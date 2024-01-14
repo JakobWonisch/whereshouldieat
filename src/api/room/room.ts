@@ -24,6 +24,10 @@ class Room {
                 id: id,
                 time: new Date()
             });
+        } else {
+            this.likes.push({
+                id
+            })
         }
     }
     
