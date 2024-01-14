@@ -142,6 +142,7 @@ const Home: NextPage = () => {
         return res.json();
       })
       .then((res) => {
+        console.log(res)
         setResultIds(res.businesses.map((r: Result) => r.id));
         setResults(res.businesses.reverse());
         initBusinesses(res.businesses.at(-1).id, res.businesses.at(-2).id)

@@ -1,6 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 
 async function handler (req: NextApiRequest, res: NextApiResponse) {
+  console.warn("returning empty object as test")
+  return res.status(200).json({})
+
   const { query } = req
   console.log("HELLO< QUERY", query)
   if (query.id) {
