@@ -11,6 +11,7 @@ async function handler (req: NextApiRequest, res: NextApiResponse) {
     });
   } else {
     // no other methods allowed
+    return res.status(405).end();
   }
 }
 

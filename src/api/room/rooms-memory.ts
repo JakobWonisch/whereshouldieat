@@ -25,19 +25,26 @@ class RoomsMemory implements IRooms {
         const maxTries = 50;
         const roomIdLength = 8;
 
+        let roomid = "fallbackroom";
+
         for(let i = 0; i < maxTries; i++) {
-            let roomid = "room-" + StringGenerator.generate(roomIdLength);
+            roomid = "room-" + StringGenerator.generate(roomIdLength);
 
             if(!this.rooms.has(roomid)) {
-                return roomid;
+                break;
             }
         }
 
-        return "fallbackroom";
+        this.rooms.set(roomid, new Room());
+
+        console.log(`rooms: ${this.rooms.get(roomid)}`)
+
+        return roomid;
     }
 
     public static getInstance() {
         if(!RoomsMemory.instance) {
+            console.error("instantiating rooms");
             RoomsMemory.instance = new RoomsMemory();
         }
 
