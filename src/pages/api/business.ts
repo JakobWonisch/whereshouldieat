@@ -1,10 +1,20 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+import { TEST_BUSINESS } from '../../../ignore/test-business'
 
 async function handler (req: NextApiRequest, res: NextApiResponse) {
-  console.warn("returning empty object as test")
-  return res.status(200).json({})
-
   const { query } = req
+
+  if(process.env.USE_TEST_DATA) {
+    console.warn("returning test data... unset 'USE_TEST_DATA' to send real requests.")
+
+    let business = {
+      ...TEST_BUSINESS,
+      id: query.id
+    };
+
+    return res.status(200).json(business)
+  }
+
   console.log("HELLO< QUERY", query)
   if (query.id) {
     const data = await fetch(
