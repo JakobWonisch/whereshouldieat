@@ -261,11 +261,11 @@ const Home: NextPage = () => {
   return (
     <>
       <div
-        style={{ height: "100%", backgroundBlendMode: toggle ? "darken" : ""}}
-        className="relative flex min-h-screen w-full flex-col items-center justify-center bg-stone-700  font-main"
+        style={{ backgroundBlendMode: toggle ? "darken" : ""}}
+        className="relative flex h-screen w-full flex-col items-center justify-center bg-stone-700  font-main"
       >
         {/*TINDER*/}
-        <div className="relative min-h-screen flex h-full w-full flex-col items-center justify-center overflow-x-hidden overflow-y-hidden">
+        <div className="relative h-full w-full flex-col items-center justify-center overflow-x-hidden overflow-y-hidden">
           <div
             style={{ height: windowSize.height , marginBottom: (bounds.height - windowSize.height + 100 > 0) ? bounds.height - windowSize.height + 100 : 0 }}
             className="flex w-full items-center justify-center "
@@ -321,7 +321,7 @@ const Home: NextPage = () => {
                   initial={{ y: 100 }}
                   animate={{ y: 0 }}
                   ref={ref}
-                  className="z-10 flex h-full w-[400px] flex-col items-center text-lg md:text-lg lg:text-xl justify-center rounded-2xl  text-stone-900 md:w-[400px] lg:absolute lg:top-10 lg:left-20  lg:mt-0 lg:h-auto  lg:w-[425px] xl:w-[500px] 2xl:w-[600px]"
+                  className="z-10 flex h-full w-[400px] flex-col items-center text-lg md:text-lg lg:text-xl justify-center rounded-2xl  text-stone-900 md:w-[400px] lg:absolute lg:top-10 lg:left-20  lg:mt-0 lg:h-1/2  lg:w-[425px] xl:w-[500px] 2xl:w-[600px]"
                 >
                   <Swipeable onSwipeLeft={swipeLeft} onSwipeRight={swipeRight}>
                     {(datum.hours && datum.hours[0]) ? <div
@@ -519,7 +519,7 @@ const Home: NextPage = () => {
           {/*WHERE*/}
           {tab == 0 && (
             <Modal toggle={toggle} setToggle={setToggle}>
-              <div className="h-1/2 w-full">
+              <div className="h-1/2 w-full md:rounded-t-2xl md:overflow-hidden">
                 <Map
                   provider={tiler}
                   center={location}
