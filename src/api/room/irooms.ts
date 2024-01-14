@@ -1,8 +1,10 @@
+import Room from "./room";
+import { Match, User } from "./types";
 
 interface IRooms {
 
-    addLike(id: string): void;
-    getMatchesSince(time: Date): Match[]; 
+    generateRoomId(): string;
+    getRoom(roomid: string): Room;
 
 }
 
