@@ -5,7 +5,6 @@ import StringGenerator from "./utils/string-generator";
 
 class RoomsMemory implements IRooms {
 
-    private static instance: IRooms;
     private rooms: Map<string, Room>;
 
     private constructor() {
@@ -43,12 +42,12 @@ class RoomsMemory implements IRooms {
     }
 
     public static getInstance() {
-        if(!RoomsMemory.instance) {
+        if(!(global as any).roomsInstance) {
             console.error("instantiating rooms");
-            RoomsMemory.instance = new RoomsMemory();
+            (global as any).roomsInstance = new RoomsMemory();
         }
 
-        return RoomsMemory.instance;
+        return (global as any).roomsInstance;
     }
     
 }
