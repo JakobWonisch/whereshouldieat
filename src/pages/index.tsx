@@ -321,7 +321,7 @@ const Home: NextPage = () => {
                   initial={{ y: 100, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   ref={ref}
-                  className="z-10 flex h-full absolute left-0 top-0 w-full flex-col items-center text-lg md:text-lg lg:text-xl justify-center rounded-2xl  text-stone-900 md:w-[400px] lg:top-[1rem] lg:left-20  lg:mt-0 lg:h-[calc(100%-4rem-2rem)] lg:w-[425px] xl:w-[500px] 2xl:w-[600px]"
+                  className="z-10 flex h-full absolute left-0 top-0 w-full flex-col items-center text-lg md:text-lg lg:text-xl justify-center rounded-2xl  text-stone-900 md:w-[20rem] lg:top-[1rem] lg:left-20  lg:mt-0 lg:h-[calc(100%-4rem-2rem)]"
                 >
                   <Swipeable onSwipeLeft={swipeLeft} onSwipeRight={swipeRight}>
                     {(datum.hours && datum.hours[0]) ? <div
@@ -333,8 +333,8 @@ const Home: NextPage = () => {
                     </div> : <div className="p-2"></div>}
 
                     {/* IMAGES */}
-                    <div className="flex w-5/6 flex-col items-center justify-start overflow-y-auto overflow-x-hidden">
-                      <div className="relative m-4 mb-0 flex aspect-square w-full flex-col items-center justify-start">
+                    <div className="flex w-5/6 flex-col items-center justify-start h-0 flex-1">
+                      <div className="relative m-4 flex aspect-square w-full flex-col items-center justify-start">
                         <Carousel
                           swipeable={false}
                           showThumbs={false}
@@ -379,73 +379,75 @@ const Home: NextPage = () => {
                           </div>
                         </div>
                       </div>
-                      {/* LINKS */}
-                      <div className="z-20 mb-4 flex w-full justify-center gap-4">
-                        <Link href={datum.url}>
-                          <a rel="noreferrer noopener" target="_blank">
-                            <img
-                              alt="yelp"
-                              className="h-8 rounded-lg"
-                              src={"yelp.svg"}
-                            />
-                          </a>
-                        </Link>
-                        <Link
-                          href={`https://www.google.com/maps/dir/${location.join(
-                            ","
-                          )}/${business.name.split(" ").join("+")}/@${
-                            business.coordinates.latitude
-                          },${business.coordinates.longitude},15z`}
-                        >
-                          <a rel="noreferrer noopener" target="_blank">
-                            <img
-                              alt="yelp"
-                              className="h-8 rounded-lg"
-                              src={"maps.svg"}
-                            />
-                          </a>
-                        </Link>
-                      </div>
-                      <p className="w-full font-semibold">
-                      {datum.categories.map((c: any) => c.title).join(", ")}
-                      </p>
-                      <p className="w-full text-left capitalize">{datum.transactions.join(" | ")}</p>
-                      {/* HOURS */}
-                      {datum.hours && (
-                        <div className="m-3 w-full ">
-                          {(() => {
-                            const hoursString = datum.hours[0].open
-                              .filter((e: any) => e.day === day)
-                              .map(
-                                (hour: any) =>
-                                  `${
-                                    hour.start.slice(0, -2) +
-                                    ":" +
-                                    hour.start.slice(-2)
-                                  } to ${
-                                    hour.end.slice(0, -2) +
-                                    ":" +
-                                    hour.end.slice(-2)
-                                  } `
-                              )
-                              .join("and ");
-                            return (
-                              <p>
-                                {hoursString
-                                  ? "Open from " + hoursString + " today"
-                                  : "Closed today"}
-                              </p>
-                            );
-                          })()}
+                      {/* SCROLLABLE CONTENT */}
+                      <div className="overflow-y-auto overflow-x-hidden">
+                        {/* LINKS */}
+                        <div className="z-20 mb-4 flex w-full justify-center gap-4">
+                          <Link href={datum.url}>
+                            <a rel="noreferrer noopener" target="_blank">
+                              <img
+                                alt="yelp"
+                                className="h-8 rounded-lg"
+                                src={"yelp.svg"}
+                              />
+                            </a>
+                          </Link>
+                          <Link
+                            href={`https://www.google.com/maps/dir/${location.join(
+                              ","
+                            )}/${business.name.split(" ").join("+")}/@${
+                              business.coordinates.latitude
+                            },${business.coordinates.longitude},15z`}
+                          >
+                            <a rel="noreferrer noopener" target="_blank">
+                              <img
+                                alt="yelp"
+                                className="h-8 rounded-lg"
+                                src={"maps.svg"}
+                              />
+                            </a>
+                          </Link>
                         </div>
-                      )}
-                      {/* INFO */}
-                      <div className="m-3 w-full">
-                        <p>{datum.display_phone}</p>
-                        <p>{datum.location.display_address.join("\n")}</p>
-                        
+                        <p className="w-full font-semibold">
+                        {datum.categories.map((c: any) => c.title).join(", ")}
+                        </p>
+                        <p className="w-full text-left capitalize">{datum.transactions.join(" | ")}</p>
+                        {/* HOURS */}
+                        {datum.hours && (
+                          <div className="my-3 w-full ">
+                            {(() => {
+                              const hoursString = datum.hours[0].open
+                                .filter((e: any) => e.day === day)
+                                .map(
+                                  (hour: any) =>
+                                    `${
+                                      hour.start.slice(0, -2) +
+                                      ":" +
+                                      hour.start.slice(-2)
+                                    } to ${
+                                      hour.end.slice(0, -2) +
+                                      ":" +
+                                      hour.end.slice(-2)
+                                    } `
+                                )
+                                .join("and ");
+                              return (
+                                <p>
+                                  {hoursString
+                                    ? "Open from " + hoursString + " today"
+                                    : "Closed today"}
+                                </p>
+                              );
+                            })()}
+                          </div>
+                        )}
+                        {/* INFO */}
+                        <div className="my-3 w-full">
+                          <p>{datum.display_phone}</p>
+                          <p>{datum.location.display_address.join("\n")}</p>
+                          
+                        </div>
                       </div>
-
                       {/* BUTTONS */}
                       <div className="m-3 flex w-full items-center justify-between">
                         <button onClick={swipeLeft}>
