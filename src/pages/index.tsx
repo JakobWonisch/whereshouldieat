@@ -321,7 +321,7 @@ const Home: NextPage = () => {
                   initial={{ y: 100 }}
                   animate={{ y: 0 }}
                   ref={ref}
-                  className="z-10 flex h-full w-[400px] flex-col items-center text-lg md:text-lg lg:text-xl justify-center rounded-2xl  text-stone-900 md:w-[400px] lg:absolute lg:top-10 lg:left-20  lg:mt-0 lg:h-1/2  lg:w-[425px] xl:w-[500px] 2xl:w-[600px]"
+                  className="z-10 flex h-full w-[400px] flex-col items-center text-lg md:text-lg lg:text-xl justify-center rounded-2xl  text-stone-900 md:w-[400px] lg:absolute lg:top-[1rem] lg:left-20  lg:mt-0 lg:h-[calc(100%-4rem-2rem)] lg:w-[425px] xl:w-[500px] 2xl:w-[600px]"
                 >
                   <Swipeable onSwipeLeft={swipeLeft} onSwipeRight={swipeRight}>
                     {(datum.hours && datum.hours[0]) ? <div
@@ -333,7 +333,7 @@ const Home: NextPage = () => {
                     </div> : <div className="p-2"></div>}
 
                     {/* IMAGES */}
-                    <div className="flex w-5/6 flex-col items-center justify-start">
+                    <div className="flex w-5/6 flex-col items-center justify-start overflow-y-auto overflow-x-hidden">
                       <div className="relative m-4 mb-0 flex aspect-square w-full flex-col items-center justify-start">
                         <Carousel
                           swipeable={false}
