@@ -94,7 +94,7 @@ const Home: NextPage = () => {
   const [ref, bounds] = useMeasure()
   const windowSize = useWindowSize();
   const [toggle, setToggle] = useQueryState("toggle", true);
-  const [tab, setTab] = useQueryState("tab", 0);
+  const [tab, setTab] = useQueryState("tab", -1);
   const [foodQuery, setFoodQuery] = useQueryState("food", "", (val) =>
     search("", val)
   );
@@ -110,6 +110,7 @@ const Home: NextPage = () => {
     [40.7812, -73.9665]
   );
   const [locationQuery, setLocationQuery] = useState("");
+  const [joinRoomId, setJoinRoomId] = useState("");
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -380,7 +381,7 @@ const Home: NextPage = () => {
                         </div>
                       </div>
                       {/* SCROLLABLE CONTENT */}
-                      <div className="overflow-y-auto overflow-x-hidden">
+                      <div className="overflow-y-auto overflow-x-hidden flex-1">
                         {/* LINKS */}
                         <div className="z-20 mb-4 flex w-full justify-center gap-4">
                           <Link href={datum.url}>
@@ -509,15 +510,66 @@ const Home: NextPage = () => {
           >
             Cravings Changed?
           </button>
+          <button
+            className={`my-8 flex h-10 absolute top-5 xl:top-20 right-5 items-center justify-center rounded-2xl hover:bg-sky-500 bg-stone-500 p-4 text-white`}
+            onClick={() => (setTab(-1), setToggle(true))}
+          >
+            <img
+              alt="link settings"
+              className="h-8 rounded-lg"
+              src={"link.png"}
+            />
+          </button>
           <div
             style={{ display: toggle ? "block" : "none" }}
             className="absolute h-full w-full bg-stone-800 bg-opacity-80"
           ></div>
         </div>
 
-        {/*MDOAL */}
+        {/*MODAL */}
 
         <AnimatePresence>
+          {/*LINK SETTINGS*/}
+          {tab == -1 && (
+            <Modal toggle={toggle} setToggle={setToggle}>
+              <div className="flex h-1/4 w-full flex-col items-center justify-center gap-4 p-4 py-8">
+                <h2 className="w-5/6 text-xl text-black">
+                  <b className="italic">Share</b> your room?
+                </h2>
+                <h2 className="w-5/6 text-xl text-black">
+                  <b className="italic">Join</b> a room?
+                </h2>
+                <DebounceInput
+                  className="w-5/6 rounded-2xl border-2 border-black p-2 focus:outline-blue-400"
+                  value={joinRoomId}
+                  placeholder="abcd1234"
+                  debounceTimeout={300}
+                  onChange={(e) => [
+                    setJoinRoomId(e.target.value),
+                  ]}
+                />
+              </div>
+              <button
+                className="absolute bottom-5 right-5 h-1/4"
+                onClick={() => setTab(0)}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-16 w-16"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </button>
+            </Modal>
+          )}
           {/*WHERE*/}
           {tab == 0 && (
             <Modal toggle={toggle} setToggle={setToggle}>
