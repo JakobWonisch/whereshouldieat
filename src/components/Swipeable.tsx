@@ -96,8 +96,6 @@ export default function Swipeable({onSwipeLeft, onSwipeRight, children}: {
     return (
         <animated.div
         style={{
-          marginTop:
-            windowSize.width >= 1024 ? 0 : -windowSize.height / 2.2,
           x,
           rotate,
           scale,

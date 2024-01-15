@@ -318,10 +318,10 @@ const Home: NextPage = () => {
               return (
                 <motion.div
                   key={datum.id}
-                  initial={{ y: 100 }}
-                  animate={{ y: 0 }}
+                  initial={{ y: 100, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
                   ref={ref}
-                  className="z-10 flex h-full w-[400px] flex-col items-center text-lg md:text-lg lg:text-xl justify-center rounded-2xl  text-stone-900 md:w-[400px] lg:absolute lg:top-[1rem] lg:left-20  lg:mt-0 lg:h-[calc(100%-4rem-2rem)] lg:w-[425px] xl:w-[500px] 2xl:w-[600px]"
+                  className="z-10 flex h-full absolute left-0 top-0 w-full flex-col items-center text-lg md:text-lg lg:text-xl justify-center rounded-2xl  text-stone-900 md:w-[400px] lg:top-[1rem] lg:left-20  lg:mt-0 lg:h-[calc(100%-4rem-2rem)] lg:w-[425px] xl:w-[500px] 2xl:w-[600px]"
                 >
                   <Swipeable onSwipeLeft={swipeLeft} onSwipeRight={swipeRight}>
                     {(datum.hours && datum.hours[0]) ? <div
